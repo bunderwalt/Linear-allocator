@@ -1,1 +1,45 @@
-# Linear-allocator
+# Linear Memory Allocator
+
+Реализация линейного аллокатора памяти на языке C под Unix системы.
+
+## Особенности
+
+- ✅ Линейное выделение памяти O(1)
+- ✅ Поддержка выравнивания памяти
+- ✅ Работа через системные вызовы (mmap/munmap)
+- ✅ Статистика использования памяти
+- ✅ Полное тестирование
+
+## Структура проекта
+
+linear_allocator/
+
+├── linear_allocator.h # Интерфейс аллокатора
+
+├── linear_allocator.c # Реализация
+
+├── main.c # Тесты и примеры
+
+├── CMakeLists.txt # Конфигурация сборки
+
+└── README.md # Документация
+
+
+## Использование
+
+```c
+#include "linear_allocator.h"
+
+// Создание аллокатора на 1MB
+LinearAllocator* alloc = create_allocator(1024 * 1024);
+
+// Выделение памяти
+int* numbers = linear_allocate(alloc, 100 * sizeof(int), 4);
+
+// Использование...
+for (int i = 0; i < 100; i++) {
+    numbers[i] = i;
+}
+
+// Освобождение
+destroy_allocator(alloc);
